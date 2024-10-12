@@ -10,17 +10,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # 1. Github Repository에서 코드 체크아웃
+    # Github Repository에서 코드 체크아웃
     - name: Checkout code
       uses: actions/checkout@v2
 
-    # 2. docker 이미지를 빌드하고 tar 파일로 저장
+    # Github secret을 사용해 application-secret.yml 파일 생성
+    - name: Create application-scret.yml
+      run: |
+        echo "${{ secrets.APPLICATION_SECRET }}" > ./src/main/resources/application-secret.yml
+
+    # docker 이미지를 빌드하고 tar 파일로 저장
     - name: Build Docker image
       run: |
         docker build -t mybible-api .
         docker save -o mybible-api.tar mybible-api
 
-    #. 3. 비드한 도커 이미지 파일을 EC2로 전송 (SCP 사용)
+    # 비드한 도커 이미지 파일을 EC2로 전송 (SCP 사용)
     - name: Transfer Docker image to EC2
       uses: appleboy/scp-action@v0.1.1
       with:
@@ -35,7 +40,7 @@ jobs:
     needs: build
 
     steps:
-    # 4. EC2에서 도커 이미지 로드 및 컨테이너 실행
+    # EC2에서 도커 이미지 로드 및 컨테이너 실행
     - name: Deploy Docker container on EC2
       uses: appleboy/ssh-action@v0.1.5
       with:
