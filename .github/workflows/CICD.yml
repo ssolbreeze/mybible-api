@@ -30,7 +30,7 @@ jobs:
     - name: Build with Gradle
       run: |
         chmod 777 ./gradlew
-        ./gradlew clean -Dtestskip
+        ./gradlew clean build -x test
 
     # docker 이미지를 빌드하고 tar 파일로 저장
     - name: Build Docker image
