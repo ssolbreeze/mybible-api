@@ -38,6 +38,7 @@ jobs:
       run: |
         docker build -t mybible-api .
         docker save -o ./mybible-api.tar mybible-api
+        chmod 664 mybible-api.tar
 
     # 비드한 도커 이미지 파일을 EC2로 전송 (SCP 사용)
     - name: Transfer Docker image to EC2
