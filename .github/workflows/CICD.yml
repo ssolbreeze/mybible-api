@@ -64,14 +64,14 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
           # 기존 컨테이너 종료 및 삭제
-          docker stop mybible-api || true
-          docker rm mybible-api || true
+          sudo docker stop mybible-api || true
+          sudo docker rm mybible-api || true
 
           # 도커 이미지 로드
-          docker load -i /home/ubuntu/mybible-api.tar
+          sudo docker load -i /home/ubuntu/mybible-api.tar
 
           # 도커 컨테이너 실행
-          docker run -d \
+          sudo docker run -d \
             --name mybible-api \
             -p 8080:8080 \
             mybible-api
