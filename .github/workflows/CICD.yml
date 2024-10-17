@@ -14,7 +14,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    
+    # install java
+    - name: Install JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
 
     # Github secret을 사용해 application-secret.yml 파일 생성
     - name: Create application-scret.yml
