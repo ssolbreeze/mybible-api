@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class OauthController {
 
     @GetMapping("/oauth/kakao")
-    public ResponseEntity<?> healthCheck(@RequestParam String code, @RequestParam String error, @RequestParam String error_description ) {
+    public ResponseEntity<?> healthCheck(@RequestParam(required = false) String code, @RequestParam(required = false) String error, @RequestParam(required = false) String error_description ) {
         System.out.println("code="+code);
         System.out.println("error="+error);
         System.out.println("error_description="+error_description);
