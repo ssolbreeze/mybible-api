@@ -23,8 +23,8 @@ public class SecurityConfig {
     private static final String[] permitAllAntPatterns = {
             "/swagger-ui/**",
             "/v3/api-docs/**",
-            "/health-check"
-//            "/api/auth/login",
+            "/health-check",
+            "/oauth/kakao",
     };
 
     @Bean
